@@ -4,58 +4,74 @@ package doble;
 
 public class Metodos {
 	
+	private NodoDoblee inicio;
+	private NodoDoblee fin;
 	
-	private NodoDoblee head;
+	public Metodos(){
+		inicio=null;
+		fin=null;
+	}
 
+	public void insertarinicio(Musica dato){
+		
+		if(inicio==null){
+			inicio=new NodoDoblee(dato,null,null);
+			fin=inicio;
+		}else{
+			NodoDoblee nuevo= new NodoDoblee(dato,null,inicio);
+			inicio.setAnterior(nuevo);
+			inicio=nuevo;
+		}
+	}
 	
-	public NodoDoblee getHead() {
-		return head;
-	}
-
-	public void setHead(NodoDoblee head) {
-		this.head = head;
-	}
-
-	public boolean isvacio(){
-		boolean respuesta=false;
-		if(this.head==null){
-			respuesta=true;
+	public boolean isVacio(){
+		if(fin==null&&inicio==null){
+			return true;
+		}else{
+			return false;
 		}
-		return respuesta;
 	}
-	 public void insertar (Musica valor){
-		 NodoDoblee nuevo = new NodoDoblee();
-		 nuevo.setDato(valor);
-		 nuevo.setSiguiente(null);
-		 nuevo.setAnteior(null);
-		 this.head=nuevo;
-	 }
-
-	 public void insertardelante(Musica valor){
-		 if(isvacio()){
-			 insertar(valor);
-		 }
-		 else{
-			 NodoDoblee nuevo= new NodoDoblee();
-			 nuevo.setDato(valor);
-			 nuevo.setSiguiente(this.head);
-			 nuevo.setAnteior(null);
-			 this.head=nuevo;
-		 }
-	 }
-	 
-	 
-	 public StringBuilder imprimir(){
-			StringBuilder cadena = new StringBuilder();
-			NodoDoblee temporal = new NodoDoblee();
-			temporal=this.getHead();
-			cadena.append("HEAD<-->");
-			while(temporal!=null){
-				cadena.append(temporal.getDato());
-				cadena.append("<-->");
-				temporal=temporal.getSiguiente();
-			}
-			cadena.append("NULL");
-			return cadena;
+	
+	
+	public void insertarfin(Musica dato){
+		
+		if(inicio==null){
+			inicio=new NodoDoblee(dato,null,null);
+			inicio=fin;
+		}else{
+			NodoDoblee nuevo= new NodoDoblee(dato,fin,null);
+			fin.setSiguiente(nuevo);
+			fin=nuevo;
 		}
+	}
+	
+	public void mostraradelantes(){
+		NodoDoblee temp=inicio;
+		while(temp!=null){
+			System.out.println(temp.getDato());
+			temp=temp.getSiguiente();
+		}
+	}
+	
+	public StringBuilder mostrardelante(){
+		StringBuilder cadena = new StringBuilder();
+		NodoDoblee temp= inicio;
+		cadena.append("NULL<-->");
+		while(temp!=null){
+			cadena.append(temp.getDato());
+			cadena.append("<-->");
+			temp=temp.getSiguiente();
+		}
+		cadena.append("NULL");
+		return cadena;
+	}
+	
+	public void mostraratras(){
+		NodoDoblee temp=fin;
+		while(temp!=null){
+			System.out.println(temp.getDato());
+			temp=temp.getAnterior();
+		}
+	}
+		
 }
