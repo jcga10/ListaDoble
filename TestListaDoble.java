@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.TextArea;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TestListaDoble extends JFrame {
 
@@ -25,6 +27,7 @@ public class TestListaDoble extends JFrame {
 	private JTextField txtGenero;
 	
 	Metodos met =new Metodos();
+	private JTextField txtBuscar;
 
 
 	/**
@@ -49,7 +52,7 @@ public class TestListaDoble extends JFrame {
 	public TestListaDoble() {
 		setTitle("Lista Doble");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 497, 482);
+		setBounds(100, 100, 497, 460);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -100,6 +103,10 @@ public class TestListaDoble extends JFrame {
 		contentPane.add(scimprimir);
 		
 		JButton btnAgregarInicio = new JButton("Agregar Inicio");
+		btnAgregarInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAgregarInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnAgregarInicio.addMouseListener(new MouseAdapter() {
 			@Override
@@ -120,11 +127,16 @@ public class TestListaDoble extends JFrame {
 			}
 			
 			});
-		btnAgregarInicio.setBounds(21, 100, 161, 20);
+		btnAgregarInicio.setBounds(61, 100, 161, 20);
 		contentPane.add(btnAgregarInicio);
 		
 		
-		JButton btnImprimir = new JButton("Imprimir");
+		JButton btnImprimir = new JButton("Imprimir Adelante");
+		btnImprimir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnImprimir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -139,8 +151,125 @@ public class TestListaDoble extends JFrame {
 
 			}
 		});
-		btnImprimir.setBounds(170, 330, 89, 23);
+		btnImprimir.setBounds(61, 332, 143, 20);
 		contentPane.add(btnImprimir);
+		
+		JButton btnAgregarFin = new JButton("Agregar Fin");
+		btnAgregarFin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Musica nuevo = new Musica();
+				
+				if(txtId.getText().isEmpty()||txtArtista.getText().isEmpty()||txtAlbum.getText().isEmpty()||txtGenero.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "¡Completa todos los campos por favor!");
+				}else{
+				nuevo.setId(txtId.getText());;
+				nuevo.setArtista(txtArtista.getText());
+				nuevo.setGenero(txtGenero.getText());
+				nuevo.setAlbum(txtAlbum.getText());
+				met.insertarfin(nuevo);
+				JOptionPane.showMessageDialog(null,"Datos insertados Atras");
+				}
+				
+			}
+		});
+		btnAgregarFin.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnAgregarFin.setBounds(249, 100, 161, 20);
+		contentPane.add(btnAgregarFin);
+		
+		JButton btnEliminarInicio = new JButton("Eliminar Inicio");
+		btnEliminarInicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+				if(met.isVacio()){
+					JOptionPane.showMessageDialog(null, "¡Ingresa un elemento en la lista para eliminar!");
+				}else{
+					int resp=JOptionPane.showConfirmDialog(null, "¿Desea eliminar el primer elemento de la lista?");
+					if(JOptionPane.OK_OPTION==resp){
+						met.eliminarinicio();
+						JOptionPane.showMessageDialog(null, "¡Primer Elemnto de la lista eliminado!");
+						scimprimir.setText("");
+					}
+				}
+				
+			}
+		});
+		btnEliminarInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnEliminarInicio.setBounds(61, 131, 161, 20);
+		contentPane.add(btnEliminarInicio);
+		
+		JButton btnEliminarFin = new JButton("Eliminar Fin");
+		btnEliminarFin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(met.isVacio()){
+					JOptionPane.showMessageDialog(null, "¡Ingresa un elemento en la lista para eliminar!");
+				}else{
+					int resp=JOptionPane.showConfirmDialog(null, "¿Desea eliminar el último elemento de la lista?");
+					if(JOptionPane.OK_OPTION==resp){
+						met.eliminarfin();
+						JOptionPane.showMessageDialog(null, "¡Último Elemnto de la lista eliminado!");
+						scimprimir.setText("");
+					}
+				}
+				
+			}
+		});
+		btnEliminarFin.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnEliminarFin.setBounds(249, 131, 161, 20);
+		contentPane.add(btnEliminarFin);
+		
+		JButton btnImprimirAtras = new JButton("Imprimir Atras");
+		btnImprimirAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(met.isVacio()){
+					JOptionPane.showMessageDialog(null, "¡LA LISTA ESTA VACIA!");
+				}else{
+					JOptionPane.showMessageDialog(null, "Se ha imprimido la lista:");
+				}
+				
+						scimprimir.setText(met.mostraratras().toString());
+			}
+		});
+		btnImprimirAtras.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnImprimirAtras.setBounds(231, 332, 143, 20);
+		contentPane.add(btnImprimirAtras);
+		
+		JLabel lblBusqueda = new JLabel("Busqueda:");
+		lblBusqueda.setFont(new Font("Verdana", Font.BOLD, 13));
+		lblBusqueda.setBounds(61, 377, 83, 20);
+		contentPane.add(lblBusqueda);
+		
+		txtBuscar = new JTextField();
+		txtBuscar.setColumns(10);
+		txtBuscar.setBounds(154, 376, 98, 20);
+		contentPane.add(txtBuscar);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String dato=txtBuscar.getText();
+				
+				if(txtBuscar.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "¡Escribe un elemento a buscar en el cuadro de texto!");
+				}else{
+					if(met.buscarr(dato)){
+						JOptionPane.showMessageDialog(null, "El elemento: "+dato+" se encuentra en la lista");	
+					}else{
+						JOptionPane.showMessageDialog(null, "El elemento: "+dato+" no se encuentra en la lista");	
+					}
+				}
+			}
+		});
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnBuscar.setBounds(271, 375, 143, 20);
+		contentPane.add(btnBuscar);
 		
 		
 	}

@@ -1,7 +1,6 @@
 package doble;
 
 
-
 public class Metodos {
 	
 	private NodoDoblee inicio;
@@ -35,8 +34,8 @@ public class Metodos {
 	
 	public void insertarfin(Musica dato){
 		
-		if(inicio==null){
-			inicio=new NodoDoblee(dato,null,null);
+		if(fin==null){
+			fin=new NodoDoblee(dato,null,null);
 			inicio=fin;
 		}else{
 			NodoDoblee nuevo= new NodoDoblee(dato,fin,null);
@@ -45,13 +44,6 @@ public class Metodos {
 		}
 	}
 	
-	public void mostraradelantes(){
-		NodoDoblee temp=inicio;
-		while(temp!=null){
-			System.out.println(temp.getDato());
-			temp=temp.getSiguiente();
-		}
-	}
 	
 	public StringBuilder mostrardelante(){
 		StringBuilder cadena = new StringBuilder();
@@ -66,12 +58,72 @@ public class Metodos {
 		return cadena;
 	}
 	
-	public void mostraratras(){
-		NodoDoblee temp=fin;
+	public StringBuilder mostraratras(){
+		StringBuilder cadena = new StringBuilder();
+		NodoDoblee temp= fin;
+		cadena.append("NULL<-->");
 		while(temp!=null){
-			System.out.println(temp.getDato());
+			cadena.append(temp.getDato());
+			cadena.append("<-->");
 			temp=temp.getAnterior();
 		}
+		cadena.append("NULL");
+		return cadena;
+	}
+	
+	
+	
+	public boolean buscarr(String dato){
+		NodoDoblee temp=inicio;
+		while(temp!=null){
+			if(temp.getDato().getId().equals(dato)){
+				return true;
+			}
+			temp=temp.getSiguiente();
+		}
+		
+		return false;
+	}
+	
+	
+	public Musica eliminarinicio(){
+		Musica dato=inicio.getDato();
+		
+		inicio=inicio.getSiguiente();
+		
+		if(inicio !=null){
+			inicio.setAnterior(null);
+		}else{
+			fin=null;
+		}
+		return dato;
+	}
+	
+	
+	public Musica eliminarfin(){
+		Musica dato=fin.getDato();
+		
+		fin=fin.getAnterior();
+		
+		if(fin !=null){
+			fin.setSiguiente(null);
+		}else{
+			inicio=null;
+		}
+		return dato;
+	}
+	
+	public NodoDoblee buscar(int posicion){
+		NodoDoblee temporal=inicio;
+		NodoDoblee anterior=null;
+		int i=0;
+		
+		while(i<posicion){
+			i++;
+			anterior=temporal;
+			temporal=temporal.getSiguiente();
+		}
+		return anterior;
 	}
 		
 }

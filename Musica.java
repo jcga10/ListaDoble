@@ -38,7 +38,7 @@ public class Musica{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "[DATOS: "+" |ID: "+id+" |ÁLBUM: "+album+ " |ARTISTA: "+artista+" |GÉNERO: "+genero+"|]";
+		return "[ DATOS: "+" | ID: "+id+" | ÁLBUM: "+album+ " | ARTISTA: "+artista+" | GÉNERO: "+genero+" | ]";
 	}
 	
 	public int compareTo(Object o) {
