@@ -17,6 +17,9 @@ import java.awt.TextArea;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class TestListaDoble extends JFrame {
 
@@ -50,10 +53,14 @@ public class TestListaDoble extends JFrame {
 	 * Create the frame.
 	 */
 	public TestListaDoble() {
+		setForeground(UIManager.getColor("RadioButtonMenuItem.foreground"));
+		setBackground(UIManager.getColor("ScrollBar.thumbDarkShadow"));
 		setTitle("Lista Doble");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 497, 460);
+		this.setResizable(false);
+		setBounds(100, 100, 497, 392);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.activeCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -99,10 +106,11 @@ public class TestListaDoble extends JFrame {
 		txtGenero.setColumns(10);
 		
 		TextArea scimprimir = new TextArea();
-		scimprimir.setBounds(33, 160, 414, 160);
+		scimprimir.setBounds(33, 160, 414, 76);
 		contentPane.add(scimprimir);
 		
 		JButton btnAgregarInicio = new JButton("Agregar Inicio");
+		btnAgregarInicio.setBackground(UIManager.getColor("RadioButtonMenuItem.selectionBackground"));
 		btnAgregarInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -116,7 +124,7 @@ public class TestListaDoble extends JFrame {
 			if(txtId.getText().isEmpty()||txtArtista.getText().isEmpty()||txtAlbum.getText().isEmpty()||txtGenero.getText().isEmpty()){
 				JOptionPane.showMessageDialog(null, "¡Completa todos los campos por favor!");
 			}else{
-			nuevo.setId((txtId.getText()));//txtId.getText());
+			nuevo.setId(txtId.getText());//txtId.getText());
 			nuevo.setArtista(txtArtista.getText());
 			nuevo.setGenero(txtGenero.getText());
 			nuevo.setAlbum(txtAlbum.getText());
@@ -151,10 +159,11 @@ public class TestListaDoble extends JFrame {
 
 			}
 		});
-		btnImprimir.setBounds(61, 332, 143, 20);
+		btnImprimir.setBounds(61, 253, 143, 20);
 		contentPane.add(btnImprimir);
 		
 		JButton btnAgregarFin = new JButton("Agregar Fin");
+		btnAgregarFin.setBackground(UIManager.getColor("RadioButtonMenuItem.selectionBackground"));
 		btnAgregarFin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -236,17 +245,17 @@ public class TestListaDoble extends JFrame {
 			}
 		});
 		btnImprimirAtras.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnImprimirAtras.setBounds(231, 332, 143, 20);
+		btnImprimirAtras.setBounds(231, 253, 143, 20);
 		contentPane.add(btnImprimirAtras);
 		
 		JLabel lblBusqueda = new JLabel("Busqueda:");
 		lblBusqueda.setFont(new Font("Verdana", Font.BOLD, 13));
-		lblBusqueda.setBounds(61, 377, 83, 20);
+		lblBusqueda.setBounds(61, 298, 83, 20);
 		contentPane.add(lblBusqueda);
 		
 		txtBuscar = new JTextField();
 		txtBuscar.setColumns(10);
-		txtBuscar.setBounds(154, 376, 98, 20);
+		txtBuscar.setBounds(154, 297, 98, 20);
 		contentPane.add(txtBuscar);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -259,7 +268,7 @@ public class TestListaDoble extends JFrame {
 				if(txtBuscar.getText().isEmpty()){
 					JOptionPane.showMessageDialog(null, "¡Escribe un elemento a buscar en el cuadro de texto!");
 				}else{
-					if(met.buscarr(dato)){
+					if(met.buscar(dato)){
 						JOptionPane.showMessageDialog(null, "El elemento: "+dato+" se encuentra en la lista");	
 					}else{
 						JOptionPane.showMessageDialog(null, "El elemento: "+dato+" no se encuentra en la lista");	
@@ -268,7 +277,7 @@ public class TestListaDoble extends JFrame {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnBuscar.setBounds(271, 375, 143, 20);
+		btnBuscar.setBounds(271, 296, 143, 20);
 		contentPane.add(btnBuscar);
 		
 		

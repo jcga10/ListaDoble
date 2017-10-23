@@ -73,7 +73,7 @@ public class Metodos {
 	
 	
 	
-	public boolean buscarr(String dato){
+	public boolean buscar(String dato){
 		NodoDoblee temp=inicio;
 		while(temp!=null){
 			if(temp.getDato().getId().equals(dato)){
@@ -113,17 +113,6 @@ public class Metodos {
 		return dato;
 	}
 	
-	public NodoDoblee buscar(int posicion){
-		NodoDoblee temporal=inicio;
-		NodoDoblee anterior=null;
-		int i=0;
-		
-		while(i<posicion){
-			i++;
-			anterior=temporal;
-			temporal=temporal.getSiguiente();
-		}
-		return anterior;
-	}
+	
 		
 }
